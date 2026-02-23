@@ -15,6 +15,7 @@ function useStorage<T>(key: string, initialValue: T): [T, (value: T) => void] {
       const item = typeof window !== 'undefined' && window.localStorage.getItem(key);
       return item ? JSON.parse(item) : initialValue;
     } catch (error) {
+      console.log(error);
       return initialValue;
     }
   });

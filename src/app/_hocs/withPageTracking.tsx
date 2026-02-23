@@ -15,7 +15,7 @@ export const PageEventContext = React.createContext({});
  */
 const withPageTracking =
   (Component: React.ElementType, pageType = PAGE_EVENTS_DEFAULT) =>
-  (props: any) => {
+  (props: React.ComponentProps<typeof Component>) => {
     const uri = useUri();
     const  params = useParams<{ slug: string; }>();
     const id = params.slug;
@@ -31,9 +31,11 @@ const withPageTracking =
 
     return (
       <PageEventContext.Provider value={pageType}>
-        <Component {...{ props }} />
+        <Component {...props} />
       </PageEventContext.Provider>
     );
   };
+
+withPageTracking.displayName = 'withPageTracking';
 
 export default withPageTracking;
